@@ -1,0 +1,32 @@
+.sidebar-container {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #5a94ff;
+    overflow-x: hidden;
+    padding-top: 20px;
+    box-shadow: 5px 5px 18px 5px #d2d2d2;
+    border-radius: 0 80px 0 0;
+}
+.nav-menu {
+    padding-left: 20px;
+}
+.menu-item {
+    line-height: 50px;
+    margin-left: 0;
+    text-decoration: none;
+    font-size: 20px;
+    color: #2f2f2f;
+    display: block;
+}
+.menu-item-active {
+    line-height: 50px;
+    margin-left: 0;
+    text-decoration: none;
+    font-size: 20px;
+    color: grey;
+    display: block;
+}

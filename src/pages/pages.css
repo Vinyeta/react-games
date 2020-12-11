@@ -1,0 +1,10 @@
+.page-container {
+    margin: 50px 50px 50px 210px;
+    padding: 0 10px;
+}
+.game-container{
+    margin: 150px;
+    width: 800px;
+    height: 500px;
+    border: 2px black solid;
+}
