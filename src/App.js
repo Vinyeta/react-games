@@ -17,9 +17,6 @@ function App() {
             <Route path="/stone" component={StonePage} />
             <Route path="/2048" component={NumbersPage} />
             <Route path="/" component={HomePage} />
-            <Route path="/">
-              <HomePage />
-            </Route>
         </Switch>
       </Router>
   );

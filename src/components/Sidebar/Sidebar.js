@@ -1,5 +1,6 @@
 import "./Sidebar.css";
 import {NavLink} from 'react-router-dom';
+import React from "react";
 
 
 export const Sidebar = () => {
@@ -7,6 +8,7 @@ export const Sidebar = () => {
     return (
         <div className="sidebar-container">
             <ul className="nav-menu">
+                <li className="menu-item"><NavLink style={{textDecoration: 'none', color: 'white'}} to="/">Home</NavLink></li>
                 <li className="menu-item"><NavLink style={{textDecoration: 'none', color: 'white'}} activeClassName="menu-item-active" to="/2048">2048</NavLink></li>
                 <li className="menu-item"><NavLink style={{textDecoration: 'none', color: 'white'}} to="/tictactoe">Tic Tac Toe</NavLink></li>
                 <li className="menu-item"><NavLink style={{textDecoration: 'none', color: 'white'}} to="/stone">Stone</NavLink></li>
