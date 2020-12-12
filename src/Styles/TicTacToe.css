@@ -1,6 +1,15 @@
 .cell {
     width: 100px;
-    height: 100px;
-    background-color: grey;
+    height: 60px;
+    background-color: blue;
     border: solid 1px black;
+    text-align: center;
+    padding-top: 50%;
+}
+
+.TicTacTow_endGame {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
 }

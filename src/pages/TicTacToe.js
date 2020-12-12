@@ -5,7 +5,7 @@ import TicTacToeCell from '../components/TicTacToeCells/TicTacToeCell';
 import Reset from '../components/Reset/Reset';
 
 
-export const TicTacToePage = ({resetClick}) => {
+export const TicTacToePage = () => {
 
     const [board, setBoard] = useState([
         [null, null, null],
@@ -15,7 +15,7 @@ export const TicTacToePage = ({resetClick}) => {
 
     const [turn, setTurn] = useState ('O');
     
-    const handleTurn = ( ) => {
+    const changeTurn = ( ) => {
         if (turn === 'O'){ 
            setTurn('X');
         } else {
@@ -23,12 +23,12 @@ export const TicTacToePage = ({resetClick}) => {
         }
     };
 
-    const click = ( row, column) => {     
-        if (!board[row][column]) {
+    const handleClick = ( row, column) => {     
+        if (!board[row][column] && !winner(board)) {
             let auxArray = board;
             auxArray[row][column] = turn;
             setBoard(auxArray);
-            handleTurn();
+            changeTurn();
         }
     }
 
@@ -46,14 +46,19 @@ export const TicTacToePage = ({resetClick}) => {
         for(let i = 0; i < lines.length; i++) {
             const [a ,b ,c] = lines[i];
             if ( board[a.row][a.column] &&
-                 board[.row][a.column] === board[b.row][b.column] &&
+                 board[a.row][a.column] === board[b.row][b.column] &&
                  board[a.row][a.column] === board[c.row][c.column]
                 ) {
                   return board[a.row][a.column]; 
-                } else {
-                    
-                }
+             } 
         }
+        let isDraw = true;
+            for (let i = 0; i < board.length; i++) {
+                if (board[i].find(element => element === null) === null){
+                    isDraw = false;
+                } 
+            }
+        if (isDraw) return 'Draw';
              
     };
 
@@ -74,10 +79,10 @@ export const TicTacToePage = ({resetClick}) => {
             [null, null, null],
         ];
         setBoard(auxArray);
-        if (turn === 'X') handleTurn();
+        if (turn === 'X') changeTurn();
         else {
-            handleTurn();
-            handleTurn();
+            changeTurn();
+            changeTurn();
         }
      }
 
@@ -85,25 +90,27 @@ export const TicTacToePage = ({resetClick}) => {
         <div className="page-container">
             <div className="game-container">
                <div className='tictaetoe_row'>
-                   <div className='cell' onClick={() => click(0,0)}><TicTacToeCell value={board[0][0]}/></div>
-                   <div className='cell' onClick={() => click(0,1)}><TicTacToeCell value={board[0][1]}/></div>
-                   <div className='cell' onClick={() => click(0,2)}><TicTacToeCell value={board[0][2]}/></div>
+                   <div className='cell' onClick={() => handleClick(0,0)}><TicTacToeCell value={board[0][0]}/></div>
+                   <div className='cell' onClick={() => handleClick(0,1)}><TicTacToeCell value={board[0][1]}/></div>
+                   <div className='cell' onClick={() => handleClick(0,2)}><TicTacToeCell value={board[0][2]}/></div>
                </div>
                <div className='tictaetoe_row'>
-                   <div className='cell' onClick={() => click(1,0)}><TicTacToeCell value={board[1][0]}/></div>
-                   <div className='cell' onClick={() => click(1,1)}><TicTacToeCell value={board[1][1]}/></div>
-                   <div className='cell' onClick={() => click(1,2)}><TicTacToeCell value={board[1][2]}/></div>
+                   <div className='cell' onClick={() => handleClick(1,0)}><TicTacToeCell value={board[1][0]}/></div>
+                   <div className='cell' onClick={() => handleClick(1,1)}><TicTacToeCell value={board[1][1]}/></div>
+                   <div className='cell' onClick={() => handleClick(1,2)}><TicTacToeCell value={board[1][2]}/></div>
                </div>
                <div className='tictaetoe_row'>
-                   <div className='cell' onClick={() => click(2,0)}><TicTacToeCell value={board[2][0]}/></div>
-                   <div className='cell' onClick={() => click(2,1)}><TicTacToeCell value={board[2][1]}/></div>
-                   <div className='cell' onClick={() => click(2,2)}><TicTacToeCell value={board[2][2]}/></div>
+                   <div className='cell' onClick={() => handleClick(2,0)}><TicTacToeCell value={board[2][0]}/></div>
+                   <div className='cell' onClick={() => handleClick(2,1)}><TicTacToeCell value={board[2][1]}/></div>
+                   <div className='cell' onClick={() => handleClick(2,2)}><TicTacToeCell value={board[2][2]}/></div>
                </div>
             </div>
             {gameOver &&
-                <div>
+                <div className='TicTacTow_endGame'>
                     <span>The winner is: {winner(board)}</span>
-                     <Reset reset={reset} /> 
+                    <div>
+                        <Reset reset={reset} /> 
+                    </div>
                 </div>
             }
         </div>
