@@ -33,37 +33,27 @@ export const TicTacToePage = ({resetClick}) => {
     }
 
     const winner = (board) => {
-        for (let i = 0; i < 3; i++ ){
-           if (board[i][0] === board[i][1] && board[i][0] === board[i][2] && board[i][0] !== null) {
-            return board[0][i];
-
-           } else if (board[0][i] === board[1][i] && board[0][i] === board[2][i] && board[0][i] !== null) {
-
-            return board[0][i];
-
-           } 
-
-        }
-        if (board[0][0] === board[1][1] && board[0][0] === board[2][2] && board[0][0] !== null) {
-            
-            return board[0][0];
-
-        } else if (board[2][0] === board[1][1] && board[2][0] === board[0][2] && board[2][0] !== null) {
-
-            return board[2][0];
-        } 
-
-        let isDraw = true;
-        for(let i = 0; i < 3; i++) {
-            for (let j = 0; j < 3; j++) {
-                if (!board[i][j]) {
-                    isDraw = false;
+        const lines = [
+            [{row:0,column:0},{row:0,column:1},{row:0,column:2}],
+            [{row:1,column:0},{row:1,column:1},{row:1,column:2}],
+            [{row:2,column:0},{row:2,column:1},{row:2,column:2}],
+            [{row:0,column:0},{row:1,column:0},{row:2,column:0}],
+            [{row:0,column:1},{row:1,column:1},{row:2,column:1}],
+            [{row:0,column:2},{row:1,column:2},{row:2,column:2}],
+            [{row:0,column:0},{row:1,column:1},{row:2,column:2}],
+            [{row:0,column:2},{row:1,column:1},{row:2,column:0}]
+        ];
+        for(let i = 0; i < lines.length; i++) {
+            const [a ,b ,c] = lines[i];
+            if ( board[a.row][a.column] &&
+                 board[.row][a.column] === board[b.row][b.column] &&
+                 board[a.row][a.column] === board[c.row][c.column]
+                ) {
+                  return board[a.row][a.column]; 
+                } else {
+                    
                 }
-            }
-        };
-
-        if (isDraw) return 'Draw';
-
+        }
              
     };
 
