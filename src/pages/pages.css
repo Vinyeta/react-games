@@ -4,7 +4,6 @@
 }
 .game-container{
     display:flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 150px;
@@ -14,24 +13,14 @@
 }
 
 .box {
+    margin: 200px;
+    border: 2px black solid;
     width: 350px;
     height: 350px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    box-shadow: 5px 5px 18px 5px #d2d2d2;
-}
-
-.box-blocked {
-    background-color: grey;
-    width: 350px;
-    height: 350px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 5px 5px 18px 5px #d2d2d2;
 }
 
 .element {
@@ -43,44 +32,4 @@
     background-color: #2f2f2f;
     width: calc(100% / 3);
     height: calc(100% / 3);
-}
-.cell-tictactoe {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: calc(100% / 3);
-    height: 100%;
-    padding: 2px;
-    box-sizing: border-box;
-    border: 1px black solid
-}
-
-.row-tictactoe {
-    display: flex;
-    width: 100%;
-    height: calc(100% / 3)
-}
-
-.restart-button {
-	background-color:#44c767;
-	border-radius:28px;
-	border:1px solid #18ab29;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:15px;
-	padding:5px 31px;
-	text-decoration:none;
-}
-.restart-button:hover {
-	background-color:#5cbf2a;
-}
-.restart-button:active {
-	position:relative;
-	top:1px;
-}
-.result-container {
-    height: 30px;
-    margin: 10px;
 }

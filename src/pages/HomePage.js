@@ -2,7 +2,6 @@ import "./pages.css";
 import React, {useState, useEffect} from "react";
 
 const eventListener = (setSelected) => (event) => {
-    console.log(event.key)
     if(event.key === 'ArrowRight') {
         setSelected(selected => selected === 9 ? selected : selected + 1)
     }
