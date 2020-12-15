@@ -1,4 +1,4 @@
-#button {
+.button {
     width: 113px;
     height: 43px;
     left: 237px;
@@ -11,7 +11,7 @@
     padding-top: 20px;
     padding-bottom: -10px;
 }
-#button:hover {
+.button:hover {
     background-color: #14142B;
     color: #FFFFFF;
 }

@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Sidebar from "./components/Sidebar/Sidebar";
 import HomePage from "./pages/HomePage";
 import TetrisPage from "./pages/TetrisPage";
-import TicTacToePage from "./pages/TicTacToe";
+import TicTacToePage from "./TicTacToe/pages/TicTacToeSelector";
 import StonePage from "./pages/StonePage";
 import NumbersPage from "./pages/NumbersPage";
 
