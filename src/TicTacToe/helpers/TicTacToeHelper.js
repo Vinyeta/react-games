@@ -8,7 +8,17 @@ const lines = [
     [{row:0, column:0},{row:1, column:1},{row:2, column:2}],
     [{row:0, column:2},{row:1, column:1},{row:2, column:0}]
 ];
-
+const corners = [
+    {row: 0, column: 0},
+    {row: 0, column: 2},
+    {row: 2, column : 2}
+];
+const edges = [
+    {row: 0, column: 1},
+    {row: 1, column: 0},
+    {row: 1, column: 2},
+    {row: 2, column: 1}
+]; 
 const winner = (board, lines) => {
         
     for(let i = 0; i < lines.length; i++) {
@@ -33,17 +43,18 @@ const winner = (board, lines) => {
 const block = (board,changeBoard, check) => {
     for(let i = 0; i < lines.length; i++) {
         const [a ,b ,c] = lines[i];
-        if (board[a.row][a.column] === 'O' || board[b.row][b.column] === 'O') {
-            if (board[a.row][a.column] === board[b.row][b.column]) {
-                if (!check) changeBoard('X',c.row,c.column);
-                return true;
-            } else if (board[a.row][a.column] === board[c.row][c.column]) {
-                if (!check)changeBoard('X',b.row,b.column);
-                return true;
-            } else if (board[b.row][b.column] === board[c.row][c.column]) {
-                if (!check) changeBoard('X',a.row,a.column);
-                return true;
-            }
+        if (board[a.row][a.column] === board[b.row][b.column] 
+            && board[a.row][a.column] === 'O' && !board[c.row][c.column]) {
+            if (!check) changeBoard('X',c.row,c.column);
+            return true;
+        } else if (board[a.row][a.column] === board[c.row][c.column] 
+            && board[a.row][a.column] === 'O' && !board[b.row][b.column]) {
+            if (!check)changeBoard('X',b.row,b.column);
+            return true;
+        } else if (board[b.row][b.column] === board[c.row][c.column] 
+            && board[b.row][b.column] === 'O' && !board[a.row][a.column]) {
+            if (!check) changeBoard('X',a.row,a.column);
+            return true;
         }
     }
     return false;
@@ -52,17 +63,18 @@ const block = (board,changeBoard, check) => {
 const win = (board,changeBoard, check) => {
     for(let i = 0; i < lines.length; i++) {
         const [a ,b ,c] = lines[i];
-        if (board[a.row][a.column] === 'X' || board[b.row][b.column] === 'X') {
-            if (board[a.row][a.column] === board[b.row][b.column]) {
-                if (!check) changeBoard('X',c.row,c.column);
-                 return true;
-            } else if (board[a.row][a.column] === board[c.row][c.column]) {
-                if (!check) changeBoard('X',b.row,b.column);
-               return true;
-            } else if (board[b.row][b.column] === board[c.row][c.column]) {
-                if (!check) changeBoard('X',a.row,a.column);
-                return true;
-            }
+        if (board[a.row][a.column] === board[b.row][b.column] 
+            && board[a.row][a.column] === 'X' && !board[c.row][c.column]) {
+            if (!check) changeBoard('X',c.row,c.column);
+            return true;
+        } else if (board[a.row][a.column] === board[c.row][c.column] 
+            && board[a.row][a.column] === 'X' && !board[b.row][b.column]) {
+            if (!check)changeBoard('X',b.row,b.column);
+            return true;
+        } else if (board[b.row][b.column] === board[c.row][c.column] 
+            && board[b.row][b.column] === 'X' && !board[a.row][a.column]) {
+            if (!check) changeBoard('X',a.row,a.column);
+            return true;
         }
     }
     return false;
@@ -135,28 +147,32 @@ const corner = (board, changeBoard) => {
     return false;    
 }
 
-const triangle = (board, changeBoard) => {
+const triangle = (board, changeBoard, check) => {
     const triangles = [
-        [{row:0, column:0}, {row:1, column:1}, {row:0, column:2}],
-        [{row:0, column:0}, {row:1, column:1}, {row:2, column:0}],
-        [{row:0, column:2}, {row:1, column:1}, {row:2, column:2}],
-        [{row:2, column:2}, {row:1, column:1}, {row:2, column:0}],
-        [{row:0, column:0}, {row:0, column:2}, {row:2, column:0}],
-        [{row:0, column:0}, {row:0, column:2}, {row:2, column:2}],
-        [{row:0, column:0}, {row:2, column:0}, {row:2, column:2}],
-        [{row:0, column:2}, {row:2, column:2}, {row:2, column:0}]
+        [[{row:0, column:0}, {row:1, column:1}, {row:0, column:2}], [{row:0, column:1},{row:2, column:0}]],
+        [[{row:0, column:0}, {row:1, column:1}, {row:2, column:0}], [{row:1, column:0},{row:2, column:2}]],
+        [[{row:0, column:2}, {row:1, column:1}, {row:2, column:2}], [{row:1, column:0},{row:2, column:2}]],
+        [[{row:2, column:2}, {row:1, column:1}, {row:2, column:0}], [{row:0, column:0},{row:2, column:1}]],
+        [[{row:0, column:0}, {row:0, column:2}, {row:2, column:0}], [{row:0, column:1},{row:1, column:0}]],
+        [[{row:0, column:0}, {row:0, column:2}, {row:2, column:2}], [{row:0, column:1},{row:1, column:2}]],
+        [[{row:0, column:0}, {row:2, column:0}, {row:2, column:2}], [{row:1, column:0},{row:2, column:1}]],
+        [[{row:0, column:2}, {row:2, column:2}, {row:2, column:0}], [{row:1, column:2},{row:2, column:1}]]
     ]
     for(let i = 0; i < triangles.length; i++) {
-        const [a ,b ,c] = triangles[i];
-        if (board[a.row][a.column] === 'X' || board[b.row][b.column] === 'X') {
-            if (board[a.row][a.column] === board[b.row][b.column]) {
-                 changeBoard('X',c.row,c.column);
-                 return true;
-            } else if (board[a.row][a.column] === board[c.row][c.column]) {
-               changeBoard('X',b.row,b.column);
-               return true;
-            } else if (board[b.row][b.column] === board[c.row][c.column]) {
-                changeBoard('X',a.row,a.column);
+        const [a ,b ,c] = triangles[i][0];
+        const [d, e] = triangles[i][1];
+        if (!board[e.row][e.column] && !board[d.row][d.column]) {
+            if (board[a.row][a.column] === board[b.row][b.column] 
+                && board[a.row][a.column] === 'X' && !board[c.row][c.column]) {
+                if (!check) changeBoard('X',c.row,c.column);
+                return true;
+            } else if (board[a.row][a.column] === board[c.row][c.column] 
+                && board[a.row][a.column] === 'X' && !board[b.row][b.column]) {
+                if (!check)changeBoard('X',b.row,b.column);
+                return true;
+            } else if (board[b.row][b.column] === board[c.row][c.column] 
+                && board[b.row][b.column] === 'X' && !board[a.row][a.column]) {
+                if (!check) changeBoard('X',a.row,a.column);
                 return true;
             }
         }
@@ -164,8 +180,17 @@ const triangle = (board, changeBoard) => {
     return false;
 }
 
+const opositeCorner = (changeBoard, lastMove) => {
+    if (lastMove.row === 0  && lastMove.column === 0) changeBoard('X', 2, 2);
+    else if (lastMove.row === 0 && lastMove.column === 2) changeBoard('X', 0, 2);
+    else if (lastMove.row === 2 && lastMove.column === 0) changeBoard('X', 2, 0);
+
+}
+
 export {
     lines,
+    corners,
+    edges,
     winner,
     block,
     win,
@@ -173,7 +198,8 @@ export {
     randomCell,
     edge,
     corner,
-    triangle
+    triangle,
+    opositeCorner
 };
 
 

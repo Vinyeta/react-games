@@ -21,7 +21,7 @@ const TicTacToeSingle = () => {
     ]);
 
     const [difficulty,setDifficulty] = useState();
-
+    
     const changeBoard = (player, row, column) => {
         let auxArray = board;
                 auxArray[row][column] = player;
@@ -32,6 +32,8 @@ const TicTacToeSingle = () => {
     const changeTurn = () => {
         setTurn(turn+1);
     };
+
+    const [AiLastMove, setAiLastMove] = useState();
 
     const handleClick = (row, column) => {
         if (!board[row][column] && !winner(board, lines)) {
@@ -49,23 +51,37 @@ const TicTacToeSingle = () => {
         }
     }
 
-
-
-
-    const[boardIsRendered,setBoardIsRendered] = useState(false);
+    const [startingPlayer, setStartingPlayer] = useState();
 
 
     useEffect (() => {
         const player = Math.random();
         const computer = Math.random();
         if(computer > player) {
+            setStartingPlayer('Computer');
+            console.log(startingPlayer);
+        } else {
+            setStartingPlayer('Player');
+            console.log(startingPlayer);
+        }
+    },[difficulty]);
+
+    const [machineState, setMachineState] = useState();
+
+    useEffect (() => {
+        if (startingPlayer === 'Computer') {
             if (difficulty === 'easy') {
                 easy(board,changeBoard);
+                changeTurn();
             } else if (difficulty === 'medium') {
                 medium(board,changeBoard);
+                changeTurn();
+            } else {
+                setMachineState(0);
+                // hard(board, changeBoard, machineState, setMachineState, null);
             }
-        } 
-    },[boardIsRendered]);
+        }
+    },[difficulty]);
 
 
     const reset = () => {
@@ -75,8 +91,8 @@ const TicTacToeSingle = () => {
             [null, null, null],
         ];
         setBoard(auxArray);
-        setDifficulty(false);
-        setBoardIsRendered(false);
+        setDifficulty(null);
+        setStartingPlayer(null);
         setTurn(0);
     }
 
@@ -89,11 +105,11 @@ const TicTacToeSingle = () => {
                     <div>
                         <span>Choose difficulty</span>
                         <Button onClick={() => setDifficulty('easy')} text={'Easy'} />
-                        <Button onClick={() => setDifficulty('medium')} text={'Medium(WIP)'} />
+                        <Button onClick={() => setDifficulty('medium')} text={'Medium'} />
                         <Button onClick={() => setDifficulty('hard')} text={'Hard(WIP)'} />
                     </div>
                     :
-                    <div className='game-container' onLoad={() => setBoardIsRendered(true)}>
+                    <div className='game-container' >
                         <div>
                             <div className='cell' onClick={() => handleClick(0, 0)}><TicTacToeCell value={board[0][0]} /></div>
                             <div className='cell' onClick={() => handleClick(0, 1)}><TicTacToeCell value={board[0][1]} /></div>

@@ -5,7 +5,9 @@ import {
     randomCell, 
     corner, 
     center,
-    triangle
+    triangle,
+    corners,
+    edges
 } from './TicTacToeHelper';
 
 const easy = (board,changeBoard) => {
@@ -22,9 +24,32 @@ const medium = (board,changeBoard) => {
     }
 }
 
+const hard = (board, changeBoard, machineState, setMachineState, 
+    lastPlayerMove, AiLastMove, setAiLastMove) => {
+        
+    lastPlayerMove = {row: lastPlayerMove[0], column: lastPlayerMove[1]};
+
+
+    switch (machineState) {
+        case 0:
+            corner(board, changeBoard);
+            setMachineState(1);
+            break;
+        case 1:
+            if (lastPlayerMove.row === 1 && lastPlayerMove.column === 1) {
+
+            }
+            break;
+    
+        default:
+            break;
+    }
+}
+
 export {
     easy,
-    medium
+    medium,
+    hard
 }
 
 

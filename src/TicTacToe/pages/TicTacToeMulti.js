@@ -37,7 +37,6 @@ export const TicTacToePage = () => {
         }
     }
 
-
     const reset = () => {
         let auxArray = [
             [null, null, null],

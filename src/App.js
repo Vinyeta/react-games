@@ -12,11 +12,11 @@ function App() {
       <Router>
           <Sidebar />
           <Switch>
-            <Route path="/tictactoe" component={TicTacToePage} />
+            <Route exact path="/tictactoe" component={TicTacToePage} />
             <Route path="/stone" component={StonePage} />
             <Route path="/2048" component={NumbersPage} />
             <Route path="/tetris" component={TetrisPage} />
-            <Route path="/" component={HomePage} />
+            <Route exact path="/" component={HomePage} />
         </Switch>
       </Router>
   );

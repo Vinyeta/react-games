@@ -13,7 +13,7 @@ const Selector = () => (
             <Route exact path='/tictactoe/single'>
                 <TicTacToeSingle />
             </Route>
-            <Route  path='/tictactoe'>
+            <Route exact path='/tictactoe'>
                 <div className='page-container'>
                     <ul>
                         <li><NavLink to="/tictactoe/single">Single Player</NavLink></li>
