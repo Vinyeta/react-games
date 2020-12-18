@@ -9,7 +9,8 @@ import {
 } from '../helpers/TicTacToeHelper';
 import {
     easy,
-    medium
+    medium,
+    hard
 } from '../helpers/AILogic';
 
 const TicTacToeSingle = () => {
@@ -46,6 +47,9 @@ const TicTacToeSingle = () => {
                 } else if (difficulty === 'medium') {
                     medium(board,changeBoard);
                     changeTurn();
+                } else if (difficulty === 'hard') {
+                    hard(board, changeBoard, machineState, setMachineState,
+                        {row: row, column: column}, AiLastMove, setAiLastMove);
                 }
             }
         }
@@ -56,7 +60,7 @@ const TicTacToeSingle = () => {
 
     useEffect (() => {
         const player = Math.random();
-        const computer = Math.random();
+        const computer = 1 //Math.random();
         if(computer > player) {
             setStartingPlayer('Computer');
             console.log(startingPlayer);
@@ -78,7 +82,9 @@ const TicTacToeSingle = () => {
                 changeTurn();
             } else {
                 setMachineState(0);
-                // hard(board, changeBoard, machineState, setMachineState, null);
+                console.log('start');
+                hard(board, changeBoard, machineState, setMachineState, null, null, setAiLastMove);
+                changeTurn();
             }
         }
     },[difficulty]);
@@ -94,6 +100,7 @@ const TicTacToeSingle = () => {
         setDifficulty(null);
         setStartingPlayer(null);
         setTurn(0);
+        setMachineState(null);
     }
 
 

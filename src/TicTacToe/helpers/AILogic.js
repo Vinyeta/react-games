@@ -7,7 +7,8 @@ import {
     center,
     triangle,
     corners,
-    edges
+    edges,
+    opositeCorner
 } from './TicTacToeHelper';
 
 const easy = (board,changeBoard) => {
@@ -26,18 +27,16 @@ const medium = (board,changeBoard) => {
 
 const hard = (board, changeBoard, machineState, setMachineState, 
     lastPlayerMove, AiLastMove, setAiLastMove) => {
-        
-    lastPlayerMove = {row: lastPlayerMove[0], column: lastPlayerMove[1]};
-
 
     switch (machineState) {
         case 0:
-            corner(board, changeBoard);
+            console.log(machineState);
+            corner(board, changeBoard, setAiLastMove);
             setMachineState(1);
             break;
         case 1:
             if (lastPlayerMove.row === 1 && lastPlayerMove.column === 1) {
-
+                opositeCorner(changeBoard, AiLastMove);
             }
             break;
     

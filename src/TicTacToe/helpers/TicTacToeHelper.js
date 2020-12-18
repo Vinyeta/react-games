@@ -110,7 +110,7 @@ function shuffle(array) {
       array[i] = t;
     }
   
-    return array;
+    return array[0];
 }
 
 const edge = (board,changeBoard) => {
@@ -120,31 +120,37 @@ const edge = (board,changeBoard) => {
         {row: 1, column: 2},
         {row: 2, column: 1},
     ];
+    let chosenEdge;
+    let check = false;
     shuffle(edges);
     edges.forEach( e => {
         if(!board[e.row][e.column]){
-            changeBoard('X',e.row,e.column);
-            return true;
+            chosenEdge = {row: e.row, column: e.column};
+            check = true;
         }
     })
-    return false;
+    changeBoard('X',chosenEdge.row, chosenEdge.column);
+    return check;
 }
 
-const corner = (board, changeBoard) => {
+const corner = (board, changeBoard, setAiLastMove) => {
     const corners = [
         {row: 0, column: 0},
         {row: 0, column: 2},
         {row: 2, column: 0},
         {row: 2, column: 2},
     ];
-    shuffle(corners);
+    let chosenCorner;
+    let check = false;
+    shuffle(edges);
     corners.forEach( e => {
         if(!board[e.row][e.column]){
-            changeBoard('X',e.row,e.column);
-            return true;
+            chosenCorner = {row: e.row, column: e.column};
+            check = true;
         }
     })
-    return false;    
+    changeBoard('X',chosenCorner.row, chosenCorner.column);
+    return check;   
 }
 
 const triangle = (board, changeBoard, check) => {
@@ -181,9 +187,25 @@ const triangle = (board, changeBoard, check) => {
 }
 
 const opositeCorner = (changeBoard, lastMove) => {
-    if (lastMove.row === 0  && lastMove.column === 0) changeBoard('X', 2, 2);
-    else if (lastMove.row === 0 && lastMove.column === 2) changeBoard('X', 0, 2);
-    else if (lastMove.row === 2 && lastMove.column === 0) changeBoard('X', 2, 0);
+    if (lastMove.row === 0  && lastMove.column === 0) {
+        console.log('test0');
+        changeBoard('X', 2, 2);
+        return true;
+    } else if (lastMove.row === 0 && lastMove.column === 2){
+        console.log('test1');
+         changeBoard('X', 0, 2);
+         return true;
+    } else if (lastMove.row === 2 && lastMove.column === 0){ 
+        console.log('test2');
+        changeBoard('X', 2, 0);
+        return true;
+    } else if (lastMove.row === 2 && lastMove.column === 2){
+        console.log('test3');
+        changeBoard('X',0,0);
+        return true;
+    } 
+    console.log(false);
+    return false;
 
 }
 
